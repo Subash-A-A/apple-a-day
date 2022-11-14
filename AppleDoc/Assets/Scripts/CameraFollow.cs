@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -11,6 +9,6 @@ public class CameraFollow : MonoBehaviour
     private void Update()
     {   
         Vector3 targetPos = new Vector3(target.position.x, target.position.y, distance);
-        transform.position = Vector3.Lerp(transform.position, targetPos, followSmooth * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPos, followSmooth * Time.unscaledDeltaTime);
     }
 }

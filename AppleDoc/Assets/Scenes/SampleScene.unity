@@ -1180,6 +1180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bc7efd1562aac4a9d133e8d27e1852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowDownRate: 0.125
 --- !u!4 &1328305923
 Transform:
   m_ObjectHideFlags: 0
@@ -1534,6 +1535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 1386648063}
   cam: {fileID: 519420031}
+  canAim: 1
 --- !u!114 &1755974637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,6 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CycleKey: 9
+  timeManager: {fileID: 1328305922}
 --- !u!1 &1932923882
 GameObject:
   m_ObjectHideFlags: 0

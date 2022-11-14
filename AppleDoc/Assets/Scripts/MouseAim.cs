@@ -7,12 +7,15 @@ public class MouseAim : MonoBehaviour
     [SerializeField] Transform weaponHolder;
     [SerializeField] Camera cam;
 
+    public bool canAim = true;
+
     private Vector2 mousePosition;
     private bool isFacingRight;
 
     private void Start()
     {
         isFacingRight = true;
+        canAim = true;
     }
     private void Update()
     {
@@ -29,21 +32,27 @@ public class MouseAim : MonoBehaviour
 
     private void FlipPlayer()
     {
-        if (mousePosition.x > transform.position.x)
+        if (canAim)
         {
-            transform.localRotation = Quaternion.identity;
-            isFacingRight = true;
-        }
-        else if (mousePosition.x < transform.position.x && isFacingRight)
-        {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-            isFacingRight=false;
+            if (mousePosition.x > transform.position.x)
+            {
+                transform.localRotation = Quaternion.identity;
+                isFacingRight = true;
+            }
+            else if (mousePosition.x < transform.position.x && isFacingRight)
+            {
+                transform.localRotation = Quaternion.Euler(0, 180, 0);
+                isFacingRight = false;
+            }
         }
     }
 
     private void AimWeapon()
     {
-        float aimAngle = Mathf.Atan2(mousePosition.y, Mathf.Abs(mousePosition.x)) * Mathf.Rad2Deg;
-        weaponHolder.localRotation = Quaternion.Euler(0, 0, aimAngle);
+        if (canAim)
+        {
+            float aimAngle = Mathf.Atan2(mousePosition.y, Mathf.Abs(mousePosition.x)) * Mathf.Rad2Deg;
+            weaponHolder.localRotation = Quaternion.Euler(0, 0, aimAngle); 
+        }
     }
 }
