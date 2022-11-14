@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -31,13 +29,14 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Move();
         Jump();
+        PowerUps();
+        PlayerAnimation();
     }
 
     private void MyInput()
     {
         horizontal = Input.GetAxis("Horizontal");
-        anim.SetFloat("velX", horizontal);
-        anim.SetBool("isGrounded", isGrounded);
+        isJumping = Input.GetButtonDown("Jump");
     }
 
     private void Move()
@@ -48,13 +47,23 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsGround);
-        isJumping = Input.GetButtonDown("Jump");
-
 
         if (isGrounded && isJumping)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            Instantiate(jumpEffect, groundCheckTransform.position, Quaternion.identity);
+            GameObject effect = Instantiate(jumpEffect, groundCheckTransform.position, Quaternion.identity);
+            Destroy(effect, 0.75f);
         }
+    }
+
+    private void PlayerAnimation()
+    {
+        anim.SetFloat("velX", horizontal);
+        anim.SetBool("isGrounded", isGrounded);
+    }
+
+    private void PowerUps()
+    {
+
     }
 }

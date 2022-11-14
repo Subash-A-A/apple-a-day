@@ -248,7 +248,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -274,7 +274,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.125
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1151,6 +1151,50 @@ Transform:
   m_Father: {fileID: 1755974631}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1328305921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1328305923}
+  - component: {fileID: 1328305922}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1328305922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328305921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc7efd1562aac4a9d133e8d27e1852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1328305923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328305921}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1386648062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,6 +1407,7 @@ GameObject:
   - component: {fileID: 1755974635}
   - component: {fileID: 1755974633}
   - component: {fileID: 1755974636}
+  - component: {fileID: 1755974637}
   m_Layer: 0
   m_Name: AppleThug
   m_TagString: Untagged
@@ -1487,9 +1532,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45fe60e2801b3049a411c59d28effbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipSpeed: 100
   weaponHolder: {fileID: 1386648063}
   cam: {fileID: 519420031}
+--- !u!114 &1755974637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755974630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3251bcacd6c494fab8159d7c45ad94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CycleKey: 9
 --- !u!1 &1932923882
 GameObject:
   m_ObjectHideFlags: 0
