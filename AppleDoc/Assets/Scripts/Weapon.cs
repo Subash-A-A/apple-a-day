@@ -19,11 +19,17 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        Shoot();
+        GetHitPoint();
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+
         DrawLine();
     }
 
-    private void Shoot()
+    private void GetHitPoint()
     {
         Ray2D ray = new Ray2D(attackPoint.position, weaponHolder.right);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, range, target);
@@ -35,6 +41,11 @@ public class Weapon : MonoBehaviour
         {
             hitPoint = ray.GetPoint(range);
         }
+    }
+
+    private void Shoot()
+    {
+        Instantiate(bulletPrefab, attackPoint.position, weaponHolder.rotation);
     }
 
     private void DrawLine()

@@ -26,7 +26,7 @@ public class MouseAim : MonoBehaviour
 
     private void GetMousePosition()
     {
-        Vector2 screenCentre = new Vector2(Screen.width/2, Screen.height/2);
+        Vector2 screenCentre = new Vector2(Screen.width / 2, Screen.height / 2);
         mousePosition = new Vector2(Input.mousePosition.x - screenCentre.x, Input.mousePosition.y - screenCentre.y);
     }
 

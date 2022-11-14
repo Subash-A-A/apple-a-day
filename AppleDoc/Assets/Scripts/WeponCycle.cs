@@ -16,7 +16,7 @@ public class WeponCycle : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(CycleKey))
+        if (Input.GetKey(CycleKey) || Input.GetButton("Fire3"))
         {
             menu.SetActive(true);
             aim.canAim = false;
