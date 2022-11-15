@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private bool prevFrameIsGrounded;
     private bool isJumping;
 
     private void Start()
@@ -29,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Move();
         Jump();
-        PowerUps();
         PlayerAnimation();
     }
 
@@ -46,7 +46,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        prevFrameIsGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsGround);
+
+        if(!prevFrameIsGrounded && isGrounded)
+        {
+            GameObject effect = Instantiate(jumpEffect, groundCheckTransform.position, Quaternion.identity);
+            Destroy(effect, 0.75f);
+        }
 
         if (isGrounded && isJumping)
         {
@@ -60,10 +67,5 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetFloat("velX", horizontal);
         anim.SetBool("isGrounded", isGrounded);
-    }
-
-    private void PowerUps()
-    {
-
     }
 }

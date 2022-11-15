@@ -5,6 +5,7 @@ using UnityEngine;
 public class MouseAim : MonoBehaviour
 {
     [SerializeField] Transform weaponHolder;
+    [SerializeField] Transform uiCanvas;
     [SerializeField] Camera cam;
 
     public bool canAim = true;
@@ -37,11 +38,14 @@ public class MouseAim : MonoBehaviour
             if (mousePosition.x > transform.position.x)
             {
                 transform.localRotation = Quaternion.identity;
+                uiCanvas.localRotation = Quaternion.identity;
                 isFacingRight = true;
             }
             else if (mousePosition.x < transform.position.x && isFacingRight)
             {
                 transform.localRotation = Quaternion.Euler(0, 180, 0);
+                uiCanvas.localRotation = Quaternion.Euler(0, 180, 0);
+
                 isFacingRight = false;
             }
         }

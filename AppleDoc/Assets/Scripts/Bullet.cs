@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.transform.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy Hit!");
+            DealDamage(collision.gameObject);
             Destroy(gameObject);
         }
         else
@@ -32,5 +32,10 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = transform.right * bulletSpeed;
+    }
+
+    private void DealDamage(GameObject obj)
+    {
+        obj.GetComponent<Health>().TakeDamage(bulletDamage);
     }
 }

@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class EnemyBrain : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
     [SerializeField] float attackDamage;
+    [SerializeField] float delayBetweenAttacks;
     [SerializeField] float detectionRange;
     [SerializeField] float stopDistance;
     [SerializeField] float jumpForce;
-    [SerializeField] Transform target;
+    [SerializeField] Transform uiCanvas;
     [SerializeField] Transform groundCheckTransform;
     [SerializeField] LayerMask whatIsGround;
 
     private Rigidbody2D rb;
     private Animator anim;
+    private GManager gManager;
+    private Transform followTarget;
 
     private float dist;
     private float xDist;
@@ -24,12 +26,20 @@ public class EnemyBrain : MonoBehaviour
     private bool isGrounded;
     private bool isChasing;
     private bool isTargetInRange;
-    private bool canJumpChase;
+    private bool canAttack = true;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        gManager = FindObjectOfType<GManager>();
+
+        if (gManager)
+        {
+            followTarget = gManager.GetPlayerTransform();
+        }
+
+        canAttack = true;
     }
 
     private void Update()
@@ -39,7 +49,7 @@ public class EnemyBrain : MonoBehaviour
         FaceDirection();
         EnemyAnimations();
 
-        if (isGrounded && target.position.y > transform.position.y && yDist > gameObject.GetComponent<BoxCollider2D>().size.y)
+        if (isGrounded && followTarget.position.y > transform.position.y && yDist > gameObject.GetComponent<BoxCollider2D>().size.y)
         {
             Jump();
         }
@@ -58,10 +68,11 @@ public class EnemyBrain : MonoBehaviour
 
     private void FaceDirection()
     {
-        direction = target.position.x > transform.position.x ? 1 : -1;
+        direction = followTarget.position.x > transform.position.x ? 1 : -1;
         if (isTargetInRange)
         {
             transform.localScale = new Vector3(direction, 1, 1);
+            uiCanvas.localScale = new Vector3(direction, 1, 1);
         }
     }
 
@@ -77,9 +88,9 @@ public class EnemyBrain : MonoBehaviour
 
     private void Sensors()
     {
-        dist = Vector2.Distance(transform.position, target.position);
-        xDist = Mathf.Abs(transform.position.x - target.position.x);
-        yDist = Mathf.Abs(transform.position.y - target.position.y);
+        dist = Vector2.Distance(transform.position, followTarget.position);
+        xDist = Mathf.Abs(transform.position.x - followTarget.position.x);
+        yDist = Mathf.Abs(transform.position.y - followTarget.position.y);
         isTargetInRange =  dist <= detectionRange && xDist >= stopDistance;
         GroundCheck();
     }
@@ -88,5 +99,20 @@ public class EnemyBrain : MonoBehaviour
     {
         Vector2 jumpDirection = transform.up + direction * transform.right;
         rb.AddForce(jumpDirection.normalized * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Player") && canAttack)
+        {
+            StartCoroutine(DealDamage(collision.gameObject));
+        }
+    }
+    IEnumerator DealDamage(GameObject obj)
+    {
+        obj.GetComponent<Health>().TakeDamage(attackDamage);
+        canAttack = false;
+        yield return new WaitForSeconds(delayBetweenAttacks);
+        canAttack = true;
     }
 }
