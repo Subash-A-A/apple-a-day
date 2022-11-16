@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 1, b: 1, a: 0.47058824}
-  hoverColor: {r: 0.70597124, g: 0, b: 1, a: 1}
+  hoverColor: {r: 0.7058824, g: 0, b: 1, a: 0.6862745}
   pieImg: {fileID: 260103256209577481}
 --- !u!1 &260103257846146715
 GameObject:
