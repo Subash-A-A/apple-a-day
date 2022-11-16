@@ -4,6 +4,7 @@ public class Bullet : MonoBehaviour
 {
     public float bulletSpeed = 10f;
     public float bulletDamage = 100f;
+    public float impactForce = 10f;
     public float travelDistance = 100f;
     [SerializeField] GameObject bulletParticle;
 
@@ -32,6 +33,8 @@ public class Bullet : MonoBehaviour
 
         if (collision.transform.CompareTag("Enemy"))
         {
+            collision.rigidbody.velocity = new Vector2(0f, collision.rigidbody.velocity.y);
+            collision.rigidbody.AddForce(transform.right * impactForce, ForceMode2D.Impulse);
             DealDamage(collision.gameObject);
             Destroy(gameObject);
         }
@@ -47,7 +50,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void DealDamage(GameObject obj)
-    {
+    {   
         obj.GetComponent<Health>().TakeDamage(bulletDamage);
     }
 

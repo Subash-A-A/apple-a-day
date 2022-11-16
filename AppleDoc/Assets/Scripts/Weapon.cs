@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Transform attackPoint;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float impactForce = 10f;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float bulletDamage = 100f;
     [SerializeField] float delayBetweenShots = 0.5f;
@@ -38,7 +39,7 @@ public class Weapon : MonoBehaviour
         GetHitPoint();
 
         if (isShooting && canShoot)
-        {
+        {   
             StartCoroutine(Shoot());
         }
 
@@ -87,5 +88,6 @@ public class Weapon : MonoBehaviour
         bulletScr.bulletDamage = bulletDamage;
         bulletScr.travelDistance = range;
         bulletScr.spawnPoint = attackPoint.position;
+        bulletScr.impactForce = impactForce;
     }
 }

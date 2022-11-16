@@ -3,7 +3,11 @@ using UnityEngine;
 public class WeaponHolder : MonoBehaviour
 {
     [SerializeField] Menu weaponMenu;
+    [SerializeField] Transform meelePoint;
+    [SerializeField] Transform weaponPoint;
     public int currentSelection;
+
+    private bool isUsingMeele;
 
     private void Update()
     {
@@ -13,6 +17,9 @@ public class WeaponHolder : MonoBehaviour
         {
             SwapWeapon();
         }
+
+        MeeleEquipCheck();
+        transform.position = (isUsingMeele) ? meelePoint.position : weaponPoint.position;
     }
 
     private void SwapWeapon()
@@ -22,5 +29,10 @@ public class WeaponHolder : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(false);
         }
         transform.GetChild(currentSelection).gameObject.SetActive(true);
+    }
+
+    private void MeeleEquipCheck()
+    {
+        isUsingMeele = transform.GetChild(currentSelection).CompareTag("MeeleWeapon");
     }
 }
