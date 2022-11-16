@@ -4,7 +4,11 @@ public class Bullet : MonoBehaviour
 {
     public float bulletSpeed = 10f;
     public float bulletDamage = 100f;
+    public float travelDistance = 100f;
     [SerializeField] GameObject bulletParticle;
+
+    [HideInInspector]
+    public Vector2 spawnPoint;
 
     private Rigidbody2D rb;
 
@@ -13,10 +17,18 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Destroy(gameObject, 10f);
     }
+    private void Update()
+    {
+        if (Vector2.Distance(spawnPoint, transform.position) >= travelDistance)
+        {
+            SpawnParticle();
+            Destroy(gameObject);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject particle = Instantiate(bulletParticle, transform.position, Quaternion.identity);
-        Destroy(particle, 0.75f);
+        SpawnParticle();
 
         if (collision.transform.CompareTag("Enemy"))
         {
@@ -37,5 +49,11 @@ public class Bullet : MonoBehaviour
     private void DealDamage(GameObject obj)
     {
         obj.GetComponent<Health>().TakeDamage(bulletDamage);
+    }
+
+    private void SpawnParticle()
+    {
+        GameObject particle = Instantiate(bulletParticle, transform.position, Quaternion.identity);
+        Destroy(particle, 0.75f);
     }
 }

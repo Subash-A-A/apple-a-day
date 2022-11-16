@@ -27,6 +27,11 @@ public class Weapon : MonoBehaviour
         line = GetComponent<LineRenderer>();
     }
 
+    private void OnEnable()
+    {
+        canShoot = true;
+    }
+
     private void Update()
     {
         MyInput();
@@ -50,7 +55,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            hitPoint = ray.GetPoint(range);
+            hitPoint = ray.GetPoint(100f);
         }
     }
 
@@ -80,5 +85,7 @@ public class Weapon : MonoBehaviour
         Bullet bulletScr = bullet.GetComponent<Bullet>();
         bulletScr.bulletSpeed = bulletSpeed;
         bulletScr.bulletDamage = bulletDamage;
+        bulletScr.travelDistance = range;
+        bulletScr.spawnPoint = attackPoint.position;
     }
 }
