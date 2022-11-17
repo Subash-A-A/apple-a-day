@@ -9,6 +9,12 @@ public class WeaponHolder : MonoBehaviour
 
     private bool isUsingMeele;
 
+    private void Start()
+    {
+        DisableAllWeapons();
+        transform.GetChild(currentSelection).gameObject.SetActive(true);
+    }
+
     private void Update()
     {
         currentSelection = weaponMenu.selection;
@@ -24,15 +30,20 @@ public class WeaponHolder : MonoBehaviour
 
     private void SwapWeapon()
     {
-        for(int i = 0; i < transform.childCount - 1; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
+        DisableAllWeapons();
         transform.GetChild(currentSelection).gameObject.SetActive(true);
     }
 
     private void MeeleEquipCheck()
     {
         isUsingMeele = transform.GetChild(currentSelection).CompareTag("MeeleWeapon");
+    }
+
+    private void DisableAllWeapons()
+    {
+        for (int i = 0; i < transform.childCount - 1; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 }

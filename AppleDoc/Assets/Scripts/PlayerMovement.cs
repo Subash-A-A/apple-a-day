@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Refrences")]
     [SerializeField] Transform groundCheckTransform;
     [SerializeField] LayerMask whatIsGround;
+    [SerializeField] Animator camAnim;
 
     private Animator anim;
     private float horizontal;
@@ -21,13 +22,15 @@ public class PlayerMovement : MonoBehaviour
     private bool prevFrameIsGrounded;
     private bool isJumping;
 
-    public bool canDash = true;
+    public bool canDash;
     public bool isDashing;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        
+        canDash = true;
     }
     private void Update()
     {
@@ -91,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         isDashing = true;
         float origGravity = rb.gravityScale;
+        camAnim.SetTrigger("Shake");
         rb.gravityScale = 0f;
         rb.velocity = Vector2.zero;
         tr.emitting = true;

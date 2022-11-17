@@ -1168,6 +1168,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1274,6 +1275,26 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!95 &519420034
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8cac68c1bbce254469dc4efc125518a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &578130113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2111,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
 --- !u!1 &1375012728 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 260103257408490543, guid: a7db8bef8ca32a043ad7edb1c06a14f0, type: 3}
@@ -2150,7 +2171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1543418205
 Transform:
   m_ObjectHideFlags: 0
@@ -2448,7 +2469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1658116442
 Transform:
   m_ObjectHideFlags: 0
@@ -3276,7 +3297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2121978861
 Transform:
   m_ObjectHideFlags: 0
@@ -3829,7 +3850,6 @@ GameObject:
   - component: {fileID: 2253614544997254834}
   - component: {fileID: 2253614544997254477}
   - component: {fileID: 2253614544997254836}
-  - component: {fileID: 2253614544997254837}
   m_Layer: 8
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -3849,27 +3869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668a6367650cf694485f03ab56029d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &2253614544997254837
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253614544997254835}
-  m_BodyType: 0
-  m_Simulated: 0
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!222 &2253614545123407001
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4269,6 +4268,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  camAnim: {fileID: 519420034}
   canDash: 1
   isDashing: 0
 --- !u!95 &2253614545635089573

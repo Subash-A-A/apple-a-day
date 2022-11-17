@@ -53,6 +53,7 @@ public class Weapon : MonoBehaviour
 
         if (isMeeleWeapon)
         {
+            meeleHitBox.SetActive(false);
             playerMovement.canDash = true;
             playerMovement.isDashing = false;
             tr.emitting = false;
@@ -73,7 +74,8 @@ public class Weapon : MonoBehaviour
                 MeeleDash();
             }
         }
-        else
+
+        if(!isMeeleWeapon)
         {
             GetHitPoint();
             DrawLine();
