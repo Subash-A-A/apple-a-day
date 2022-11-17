@@ -19,6 +19,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] float delayBetweenShots = 0.5f;
     [SerializeField] float range = 200f;
     [SerializeField] LayerMask targetLayer;
+    [SerializeField] AudioClip shotSound;
+    [SerializeField] float pitchCap;
 
     [SerializeField] bool isFullAuto = false;
     [SerializeField] bool useTorch = true;
@@ -30,17 +32,16 @@ public class Weapon : MonoBehaviour
     private Collider2D playerColl;
     private Transform weaponHolder;
     private Vector2 hitPoint;
+    private AudioManager audioManager;
 
     private bool canShoot = true;
     private bool isShooting;
-
-    private float currentRotation;
-    private float prevRotation;
 
     private void Start()
     {
         canShoot = true;
         weaponHolder = transform.parent;
+        audioManager = FindObjectOfType<AudioManager>();
         line = GetComponent<LineRenderer>();
         playerMovement = player.GetComponent<PlayerMovement>();
         playerRb = player.GetComponent<Rigidbody2D>();
@@ -108,6 +109,7 @@ public class Weapon : MonoBehaviour
     {
         SpawnBullet();
         canShoot = false;
+        audioManager.Play("Weapon", Random.Range(1f, pitchCap), shotSound);
         yield return new WaitForSeconds(delayBetweenShots);
         canShoot = true;
     }
@@ -139,6 +141,7 @@ public class Weapon : MonoBehaviour
     {
         if (playerMovement.canDash)
         {
+            audioManager.Play("KatanaSlash", Random.Range(1f, 2f));
             StartCoroutine(playerMovement.PlayerDashAttack(player.transform.right, meeleDashPower, meeleDashTime, meeleDashCooldown, tr, meeleHitBox));
         }
     }

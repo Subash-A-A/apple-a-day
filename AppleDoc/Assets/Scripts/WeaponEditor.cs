@@ -22,6 +22,8 @@ public class WeaponEditor : Editor
     SerializedProperty isFullAuto;
     SerializedProperty useTorch;
     SerializedProperty torchLight;
+    SerializedProperty shotSound;
+    SerializedProperty pitchCap;
     #endregion
 
     private void OnEnable()
@@ -46,6 +48,8 @@ public class WeaponEditor : Editor
         isFullAuto = serializedObject.FindProperty("isFullAuto");
         useTorch = serializedObject.FindProperty("useTorch");
         torchLight = serializedObject.FindProperty("torchLight");
+        shotSound = serializedObject.FindProperty("shotSound");
+        pitchCap = serializedObject.FindProperty("pitchCap");
     }
 
     public override void OnInspectorGUI()
@@ -77,6 +81,8 @@ public class WeaponEditor : Editor
             EditorGUILayout.PropertyField(range);
             EditorGUILayout.PropertyField(targetLayer);
             EditorGUILayout.PropertyField(isFullAuto);
+            EditorGUILayout.PropertyField(shotSound);
+            EditorGUILayout.PropertyField(pitchCap);
         }
 
         serializedObject.ApplyModifiedProperties();

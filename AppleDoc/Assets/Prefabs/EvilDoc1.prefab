@@ -884,6 +884,7 @@ GameObject:
   - component: {fileID: 3362817491245842856}
   - component: {fileID: 3362817491245842863}
   - component: {fileID: 3362817490603996848}
+  - component: {fileID: 4364925938104755380}
   m_Layer: 9
   m_Name: EvilDoc1
   m_TagString: Enemy
@@ -1016,6 +1017,38 @@ MonoBehaviour:
   maxHealth: 100
   healthColor: {r: 0.97647065, g: 0.27058825, b: 0.27450982, a: 1}
   healthBarFill: {fileID: 3362817490837483153}
+--- !u!114 &4364925938104755380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362817491245842852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 0f5422980000000069e5404a
+  m_ShapePath:
+  - {x: -0.32999992, y: -0.4823892, z: 0}
+  - {x: -0.3310597, y: 0.22104332, z: 0}
+  - {x: -0.58597565, y: 0.6646632, z: 0}
+  - {x: -0.32999992, y: 1.2323613, z: 0}
+  - {x: -0.006621361, y: 1.3598871, z: 0}
+  - {x: 0.32999992, y: 1.2323613, z: 0}
+  - {x: 0.58597565, y: 0.7176328, z: 0}
+  - {x: 0.327749, y: 0.2442175, z: 0}
+  - {x: 0.32999992, y: -0.4823892, z: 0}
+  m_ShapePathHash: -1750128421
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -22198
 --- !u!1 &3362817491258044726
 GameObject:
   m_ObjectHideFlags: 0

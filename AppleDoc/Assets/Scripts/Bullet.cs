@@ -12,10 +12,12 @@ public class Bullet : MonoBehaviour
     public Vector2 spawnPoint;
 
     private Rigidbody2D rb;
+    private AudioManager manager;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        manager = FindObjectOfType<AudioManager>();
         Destroy(gameObject, 10f);
     }
     private void Update()
@@ -56,6 +58,7 @@ public class Bullet : MonoBehaviour
 
     private void SpawnParticle()
     {
+        manager.Play("BulletExplode");
         GameObject particle = Instantiate(bulletParticle, transform.position, Quaternion.identity);
         Destroy(particle, 0.75f);
     }

@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Weapon
   - MeeleWeapon
+  - PrimaryWeapon
+  - SecondaryWeapon
   layers:
   - Default
   - TransparentFX
