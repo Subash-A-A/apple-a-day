@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Particles")]
     [SerializeField] GameObject jumpEffect;
+    [SerializeField] GameObject dashEffect;
 
     [Header("Refrences")]
     [SerializeField] Transform groundCheckTransform;
@@ -91,6 +92,9 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator PlayerDashAttack(Vector2 dashDirection, float dashPower, float dashTime, float dashCooldown, TrailRenderer tr, GameObject hitbox)
     {
+        GameObject effect = Instantiate(dashEffect, groundCheckTransform.position, Quaternion.identity);
+        Destroy(effect, 0.75f);
+
         canDash = false;
         isDashing = true;
         float origGravity = rb.gravityScale;

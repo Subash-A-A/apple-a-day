@@ -4264,6 +4264,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   jumpEffect: {fileID: 3842628460474599581, guid: 44011a29b3edb684e8d2ac16eeae2784, type: 3}
+  dashEffect: {fileID: 3842628460474599581, guid: d8b20dd61fe714644a00017a074f19b8, type: 3}
   groundCheckTransform: {fileID: 2253614545158686659}
   whatIsGround:
     serializedVersion: 2

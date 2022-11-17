@@ -34,6 +34,9 @@ public class Weapon : MonoBehaviour
     private bool canShoot = true;
     private bool isShooting;
 
+    private float currentRotation;
+    private float prevRotation;
+
     private void Start()
     {
         canShoot = true;
