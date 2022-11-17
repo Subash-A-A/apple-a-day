@@ -28,7 +28,6 @@ public class SpawnManager : MonoBehaviour
     IEnumerator Spawn()
     {   
         Vector2 spawnPos = Random.insideUnitCircle.normalized * spawnRadius;
-        print(spawnPos);
 
         if(spawnPos.y < 0)
         {

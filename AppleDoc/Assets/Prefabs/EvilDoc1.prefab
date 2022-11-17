@@ -995,7 +995,7 @@ MonoBehaviour:
   delayBetweenAttacks: 0.25
   detectionRange: 5
   stopDistance: 0.5
-  jumpForce: 1
+  jumpForce: 10
   uiCanvas: {fileID: 3362817491035977254}
   groundCheckTransform: {fileID: 3362817489427159128}
   whatIsGround:

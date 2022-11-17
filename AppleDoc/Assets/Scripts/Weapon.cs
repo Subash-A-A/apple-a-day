@@ -3,6 +3,13 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour
 {
+    public bool isMeeleWeapon;
+    [SerializeField] float meeleDashPower = 10f;
+    [SerializeField] float meeleDashTime = 0.2f;
+    [SerializeField] float meeleDashCooldown = 1f;
+    [SerializeField] TrailRenderer tr;
+    [SerializeField] GameObject meeleHitBox;
+
     [SerializeField] GameObject player;
     [SerializeField] Transform attackPoint;
     [SerializeField] GameObject bulletPrefab;
@@ -11,10 +18,16 @@ public class Weapon : MonoBehaviour
     [SerializeField] float bulletDamage = 100f;
     [SerializeField] float delayBetweenShots = 0.5f;
     [SerializeField] float range = 200f;
-    [SerializeField] LayerMask target;
+    [SerializeField] LayerMask targetLayer;
+
     [SerializeField] bool isFullAuto = false;
+    [SerializeField] bool useTorch = true;
+    [SerializeField] GameObject torchLight;
     
     private LineRenderer line;
+    private PlayerMovement playerMovement;
+    private Rigidbody2D playerRb;
+    private Collider2D playerColl;
     private Transform weaponHolder;
     private Vector2 hitPoint;
 
@@ -26,30 +39,56 @@ public class Weapon : MonoBehaviour
         canShoot = true;
         weaponHolder = transform.parent;
         line = GetComponent<LineRenderer>();
+        playerMovement = player.GetComponent<PlayerMovement>();
+        playerRb = player.GetComponent<Rigidbody2D>();
+        playerColl = player.GetComponent<Collider2D>();
+
+        torchLight.SetActive(useTorch);
     }
 
     private void OnEnable()
     {
         canShoot = true;
+        torchLight.SetActive(useTorch);
+
+        if (isMeeleWeapon)
+        {
+            playerMovement.canDash = true;
+            playerMovement.isDashing = false;
+            tr.emitting = false;
+            playerRb.velocity = Vector2.right * 0f;
+            playerColl.enabled = true;
+            playerRb.gravityScale = 1f;
+        }
     }
 
     private void Update()
     {
         MyInput();
-        GetHitPoint();
+        
+        if (isMeeleWeapon)
+        {
+            if (isShooting)
+            {
+                MeeleDash();
+            }
+        }
+        else
+        {
+            GetHitPoint();
+            DrawLine();
+        }
 
-        if (isShooting && canShoot)
+        if (isShooting && canShoot && !isMeeleWeapon)
         {   
             StartCoroutine(Shoot());
         }
-
-        DrawLine();
     }
 
     private void GetHitPoint()
     {
         Ray2D ray = new Ray2D(attackPoint.position, weaponHolder.right);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, range, target);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, range, targetLayer);
         if (hit.collider != null)
         {
             hitPoint = hit.point;
@@ -89,5 +128,13 @@ public class Weapon : MonoBehaviour
         bulletScr.travelDistance = range;
         bulletScr.spawnPoint = attackPoint.position;
         bulletScr.impactForce = impactForce;
+    }
+
+    private void MeeleDash()
+    {
+        if (playerMovement.canDash)
+        {
+            StartCoroutine(playerMovement.PlayerDashAttack(player.transform.right, meeleDashPower, meeleDashTime, meeleDashCooldown, tr, meeleHitBox));
+        }
     }
 }

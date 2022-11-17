@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     private bool prevFrameIsGrounded;
     private bool isJumping;
 
+    public bool canDash = true;
+    public bool isDashing;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -27,10 +31,23 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         MyInput();
-        Move();
         Jump();
         PlayerAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+        Move();
     }
 
     private void MyInput()
@@ -57,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && isJumping)
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(transform.up.normalized * jumpForce, ForceMode2D.Impulse);
             GameObject effect = Instantiate(jumpEffect, groundCheckTransform.position, Quaternion.identity);
             Destroy(effect, 0.75f);
         }
@@ -67,5 +84,26 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetFloat("velX", horizontal);
         anim.SetBool("isGrounded", isGrounded);
+    }
+
+    public IEnumerator PlayerDashAttack(Vector2 dashDirection, float dashPower, float dashTime, float dashCooldown, TrailRenderer tr, GameObject hitbox)
+    {
+        canDash = false;
+        isDashing = true;
+        float origGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = Vector2.zero;
+        tr.emitting = true;
+        hitbox.SetActive(true);
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        rb.velocity = dashDirection.normalized * dashPower;
+        yield return new WaitForSeconds(dashTime);
+        gameObject.GetComponent<Collider2D>().enabled = true;
+        rb.gravityScale = origGravity;
+        isDashing = false;
+        tr.emitting = false;
+        hitbox.SetActive(false);
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }

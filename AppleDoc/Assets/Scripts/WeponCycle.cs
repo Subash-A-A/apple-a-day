@@ -13,7 +13,7 @@ public class WeponCycle : MonoBehaviour
         aim = GetComponent<MouseAim>();
         menu.SetActive(false);
     }
-
+    
     private void Update()
     {
         if (Input.GetKey(CycleKey) || Input.GetButton("Fire3"))

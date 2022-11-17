@@ -24,6 +24,7 @@ public class EnemyBrain : MonoBehaviour
 
     private int direction;
     private bool isGrounded;
+    private bool canJump;
     private bool isChasing;
     private bool isTargetInRange;
     private bool canAttack = true;
@@ -40,6 +41,7 @@ public class EnemyBrain : MonoBehaviour
         }
 
         canAttack = true;
+        canJump = true;
     }
 
     private void Update()
@@ -48,16 +50,16 @@ public class EnemyBrain : MonoBehaviour
         Sensors();
         FaceDirection();
         EnemyAnimations();
-
-        if (isGrounded && followTarget.position.y > transform.position.y && yDist > gameObject.GetComponent<BoxCollider2D>().size.y)
-        {
-            Jump();
-        }
     }
 
     private void FixedUpdate()
     {
         Move();
+        
+        if (isGrounded && yDist > gameObject.GetComponent<BoxCollider2D>().size.y && canJump && Random.value >= 0.3f)
+        {
+            StartCoroutine(Jump());
+        }
     }
 
     private void Move()
@@ -95,10 +97,13 @@ public class EnemyBrain : MonoBehaviour
         GroundCheck();
     }
 
-    private void Jump()
+    private IEnumerator Jump()
     {
+        canJump = false;
         Vector2 jumpDirection = transform.up + direction * transform.right;
         rb.AddForce(jumpDirection.normalized * jumpForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+        canJump = true;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -114,5 +119,13 @@ public class EnemyBrain : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(delayBetweenAttacks);
         canAttack = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("MeeleWeapon"))
+        {
+            gameObject.GetComponent<Health>().TakeDamage(25f);
+        }
     }
 }
