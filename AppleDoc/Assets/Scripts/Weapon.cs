@@ -37,16 +37,19 @@ public class Weapon : MonoBehaviour
     private bool canShoot = true;
     private bool isShooting;
 
+    private void Awake()
+    {
+        playerMovement = player.GetComponent<PlayerMovement>();
+        playerRb = player.GetComponent<Rigidbody2D>();
+        playerColl = player.GetComponent<Collider2D>();
+    }
+
     private void Start()
     {
         canShoot = true;
         weaponHolder = transform.parent;
         audioManager = FindObjectOfType<AudioManager>();
         line = GetComponent<LineRenderer>();
-        playerMovement = player.GetComponent<PlayerMovement>();
-        playerRb = player.GetComponent<Rigidbody2D>();
-        playerColl = player.GetComponent<Collider2D>();
-
         torchLight.SetActive(useTorch);
     }
 

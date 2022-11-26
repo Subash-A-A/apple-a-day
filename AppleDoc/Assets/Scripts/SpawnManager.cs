@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemies;
+    [System.Serializable]
+    class SpawnItem
+    {
+        public GameObject spawn;
+        [Range(0.25f, 1f)]
+        public float minSize;
+    }
+
+    [SerializeField] SpawnItem[] enemies;
     [SerializeField] float spawnDelay = 1f;
     [SerializeField] int maxSpawnAmount = 20;
     [SerializeField] float spawnRadius = 10f;
@@ -35,10 +43,27 @@ public class SpawnManager : MonoBehaviour
         }
 
         canSpawn = false;
-        Instantiate(enemies[Random.Range(0, enemies.Length - 1)], spawnPos, Quaternion.identity);
+        SpawnItem enemyItem = enemies[Random.Range(0, enemies.Length)];
+        GameObject enemy = Instantiate(enemyItem.spawn, spawnPos, Quaternion.identity);
+
+        SetEnemyParameters(enemy, enemyItem);
+
         count++;
         yield return new WaitForSeconds(spawnDelay);
         canSpawn = true;
+    }
+
+    private void SetEnemyParameters(GameObject enemy, SpawnItem enemyItem)
+    {
+        EnemyBrain brain = enemy.GetComponent<EnemyBrain>();
+        Animator anim = enemy.GetComponent<Animator>();
+        Health health = enemy.GetComponent<Health>();
+        float randomScale = Random.Range(enemyItem.minSize, 1f);
+        enemy.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        brain.movementSpeed /= randomScale;
+        brain.jumpForce /= randomScale;
+        health.maxHealth *= randomScale;
+        anim.SetFloat("chaseSpeed", 1 / randomScale);
     }
     
 }

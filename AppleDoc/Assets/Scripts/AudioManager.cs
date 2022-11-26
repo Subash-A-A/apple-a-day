@@ -5,6 +5,7 @@ using System.Collections;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] audioClips;
+    public bool playBgm = true;
 
     private void Awake()
     {
@@ -17,9 +18,24 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (playBgm)
+        {
+            Play("bg1", true);
+        }
+    }
+
     public void Play(string name)
     {
         Sound sound = Array.Find(audioClips, i => i.name == name);
+        sound.source.Play();
+    }
+
+    public void Play(string name, bool loop)
+    {
+        Sound sound = Array.Find(audioClips, i => i.name == name);
+        sound.source.loop = loop;
         sound.source.Play();
     }
 

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Animator camAnim;
 
     private Animator anim;
+    private AudioManager audioManager;
     private float horizontal;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -30,7 +31,8 @@ public class PlayerMovement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        
+        audioManager = FindObjectOfType<AudioManager>();
+
         canDash = true;
     }
     private void Update()
@@ -72,12 +74,14 @@ public class PlayerMovement : MonoBehaviour
 
         if(!prevFrameIsGrounded && isGrounded)
         {
+            audioManager.Play("Land");
             GameObject effect = Instantiate(jumpEffect, groundCheckTransform.position, Quaternion.identity);
             Destroy(effect, 0.75f);
         }
 
         if (isGrounded && isJumping)
         {
+            audioManager.Play("Jump");
             rb.AddForce(transform.up.normalized * jumpForce, ForceMode2D.Impulse);
             GameObject effect = Instantiate(jumpEffect, groundCheckTransform.position, Quaternion.identity);
             Destroy(effect, 0.75f);

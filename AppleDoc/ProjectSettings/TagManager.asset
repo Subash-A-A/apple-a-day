@@ -9,6 +9,7 @@ TagManager:
   - MeeleWeapon
   - PrimaryWeapon
   - SecondaryWeapon
+  - EnemyInner
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Bullet
   - Player
   - Enemy
-  - 
+  - EnemyInner
   - 
   - 
   - 

@@ -3,14 +3,15 @@ using System.Collections;
 
 public class EnemyBrain : MonoBehaviour
 {
-    [SerializeField] float movementSpeed;
+    public float movementSpeed;
+    public float jumpForce;
     [SerializeField] float attackDamage;
     [SerializeField] float delayBetweenAttacks;
     [SerializeField] float detectionRange;
     [SerializeField] float stopDistance;
-    [SerializeField] float jumpForce;
     [SerializeField] Transform uiCanvas;
     [SerializeField] Transform groundCheckTransform;
+    [SerializeField] Transform patrolSensor;
     [SerializeField] LayerMask whatIsGround;
 
     private Rigidbody2D rb;
@@ -28,6 +29,7 @@ public class EnemyBrain : MonoBehaviour
     private bool isChasing;
     private bool isTargetInRange;
     private bool canAttack = true;
+    private bool isFacingRight = true;
 
     private void Start()
     {
@@ -46,24 +48,25 @@ public class EnemyBrain : MonoBehaviour
 
     private void Update()
     {
-        FaceDirection();
-        Sensors();
-        FaceDirection();
-        EnemyAnimations();
+        if (followTarget)
+        {
+            Sensors();
+            FaceDirection();
+            EnemyAnimations();
+        }
     }
 
     private void FixedUpdate()
     {
         Move();
-        
-        if (isGrounded && yDist > gameObject.GetComponent<BoxCollider2D>().size.y && canJump && Random.value >= 0.3f)
+
+        if (isGrounded && yDist > gameObject.GetComponent<BoxCollider2D>().size.y && canJump && Random.value >= 0.3f && isTargetInRange)
         {
             StartCoroutine(Jump());
         }
     }
-
     private void Move()
-    {   
+    {
         rb.velocity = (isTargetInRange) ? new Vector2(movementSpeed * direction, rb.velocity.y) : new Vector2(isGrounded?0f:rb.velocity.x, rb.velocity.y);
         isChasing = rb.velocity.magnitude >= 0.01f;
     }
@@ -71,10 +74,19 @@ public class EnemyBrain : MonoBehaviour
     private void FaceDirection()
     {
         direction = followTarget.position.x > transform.position.x ? 1 : -1;
-        if (isTargetInRange)
+
+        if (followTarget.position.x > transform.position.x)
         {
-            transform.localScale = new Vector3(direction, 1, 1);
-            uiCanvas.localScale = new Vector3(direction, 1, 1);
+            transform.localRotation = Quaternion.identity;
+            uiCanvas.localRotation = Quaternion.identity;
+            isFacingRight = true;
+        }
+        else if (followTarget.position.x < transform.position.x && isFacingRight)
+        {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            uiCanvas.localRotation = Quaternion.Euler(0, 180, 0);
+
+            isFacingRight = false;
         }
     }
 
@@ -84,16 +96,18 @@ public class EnemyBrain : MonoBehaviour
     }
 
     private void EnemyAnimations()
-    {
+    {   
         anim.SetBool("isChasing", isChasing);
+        anim.SetBool("isGrounded", isGrounded);
     }
 
     private void Sensors()
     {
         dist = Vector2.Distance(transform.position, followTarget.position);
         xDist = Mathf.Abs(transform.position.x - followTarget.position.x);
-        yDist = Mathf.Abs(transform.position.y - followTarget.position.y);
+        yDist = followTarget.position.y - transform.position.y;
         isTargetInRange =  dist <= detectionRange && xDist >= stopDistance;
+        
         GroundCheck();
     }
 
