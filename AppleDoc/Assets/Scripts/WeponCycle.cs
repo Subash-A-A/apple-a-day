@@ -6,11 +6,9 @@ public class WeponCycle : MonoBehaviour
     [SerializeField] TimeManager timeManager;
     [SerializeField] EffectManager effectManager;
     [SerializeField] GameObject menu;
-    private MouseAim aim;
 
     private void Start()
     {
-        aim = GetComponent<MouseAim>();
         menu.SetActive(false);
     }
     
@@ -19,7 +17,6 @@ public class WeponCycle : MonoBehaviour
         if (Input.GetKey(CycleKey) || Input.GetButton("Fire3"))
         {
             menu.SetActive(true);
-            //aim.canAim = false;
             effectManager.ChangeChromaticAbb(1f);
             effectManager.ChangeSaturation(-100f);
             effectManager.SetDOF(true);
@@ -28,7 +25,6 @@ public class WeponCycle : MonoBehaviour
         else
         {
             menu.SetActive(false);
-            //aim.canAim = true;
             effectManager.ChangeChromaticAbb(0f);
             effectManager.ChangeSaturation(0f);
             effectManager.SetDOF(false);

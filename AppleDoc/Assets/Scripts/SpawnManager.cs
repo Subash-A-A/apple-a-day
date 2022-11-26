@@ -62,6 +62,8 @@ public class SpawnManager : MonoBehaviour
         enemy.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
         brain.movementSpeed /= randomScale;
         brain.jumpForce /= randomScale;
+        brain.delayBetweenAttacks *= randomScale;
+        brain.attackDamage *= randomScale;
         health.maxHealth *= randomScale;
         anim.SetFloat("chaseSpeed", 1 / randomScale);
     }

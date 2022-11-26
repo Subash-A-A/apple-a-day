@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Particles")]
     [SerializeField] GameObject jumpEffect;
-    [SerializeField] GameObject dashEffect;
+    [SerializeField] ParticleSystem dashEffect;
 
     [Header("Refrences")]
     [SerializeField] Transform groundCheckTransform;
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Move()
-    {   
+    {
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
     }
 
@@ -96,9 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator PlayerDashAttack(Vector2 dashDirection, float dashPower, float dashTime, float dashCooldown, TrailRenderer tr, GameObject hitbox)
     {
-        GameObject effect = Instantiate(dashEffect, groundCheckTransform.position, Quaternion.identity);
-        Destroy(effect, 0.75f);
-
+        dashEffect.Play();
         canDash = false;
         isDashing = true;
         float origGravity = rb.gravityScale;
@@ -117,5 +115,6 @@ public class PlayerMovement : MonoBehaviour
         hitbox.SetActive(false);
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+        dashEffect.Stop();
     }
 }

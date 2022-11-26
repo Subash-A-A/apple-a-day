@@ -5,6 +5,8 @@ public class WeaponEditor : Editor
 {
     #region SerializedProperties
     SerializedProperty isMeeleWeapon;
+    SerializedProperty hasAltAttack;
+    SerializedProperty isAltAttackRanged;
     SerializedProperty meeleDashPower;
     SerializedProperty meeleDashTime;
     SerializedProperty meeleDashCooldown;
@@ -29,15 +31,16 @@ public class WeaponEditor : Editor
     private void OnEnable()
     {
         isMeeleWeapon = serializedObject.FindProperty("isMeeleWeapon");
+        hasAltAttack = serializedObject.FindProperty("hasAltAttack");
+        isAltAttackRanged = serializedObject.FindProperty("isAltAttackRanged");
         meeleDashPower = serializedObject.FindProperty("meeleDashPower");
         meeleDashTime = serializedObject.FindProperty("meeleDashTime");
         meeleDashCooldown = serializedObject.FindProperty("meeleDashCooldown");
         tr = serializedObject.FindProperty("tr");
         meeleHitBox = serializedObject.FindProperty("meeleHitBox");
-        
+
         player = serializedObject.FindProperty("player");
         attackPoint = serializedObject.FindProperty("attackPoint");
-
         bulletPrefab = serializedObject.FindProperty("bulletPrefab");
         impactForce = serializedObject.FindProperty("impactForce");
         bulletSpeed = serializedObject.FindProperty("bulletSpeed");
@@ -54,17 +57,37 @@ public class WeaponEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        Weapon weaponScript = (Weapon)target;
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(player);
         EditorGUILayout.PropertyField(attackPoint);
-        EditorGUILayout.PropertyField(isMeeleWeapon);
         EditorGUILayout.PropertyField(useTorch);
         EditorGUILayout.PropertyField(torchLight);
 
-        if (weaponScript.isMeeleWeapon)
+        EditorGUILayout.PropertyField(isMeeleWeapon);
+
+        if (isMeeleWeapon.boolValue)
         {
+            EditorGUILayout.PropertyField(hasAltAttack);
+            if (hasAltAttack.boolValue)
+            {
+                EditorGUILayout.PropertyField(isAltAttackRanged);
+                
+                if (isAltAttackRanged.boolValue)
+                {
+                    EditorGUILayout.PropertyField(bulletPrefab);
+                    EditorGUILayout.PropertyField(impactForce);
+                    EditorGUILayout.PropertyField(bulletSpeed);
+                    EditorGUILayout.PropertyField(bulletDamage);
+                    EditorGUILayout.PropertyField(delayBetweenShots);
+                    EditorGUILayout.PropertyField(range);
+                    EditorGUILayout.PropertyField(targetLayer);
+                    EditorGUILayout.PropertyField(isFullAuto);
+                    EditorGUILayout.PropertyField(shotSound);
+                    EditorGUILayout.PropertyField(pitchCap);
+                }
+            }
+
             EditorGUILayout.PropertyField(meeleDashPower);
             EditorGUILayout.PropertyField(meeleDashTime);
             EditorGUILayout.PropertyField(meeleDashCooldown);

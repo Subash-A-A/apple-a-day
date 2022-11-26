@@ -46,6 +46,14 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            DealDamage(collision.gameObject);
+        }
+    }
+
     private void FixedUpdate()
     {
         rb.velocity = transform.right * bulletSpeed;

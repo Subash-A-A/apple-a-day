@@ -5,14 +5,17 @@ public class EnemyBrain : MonoBehaviour
 {
     public float movementSpeed;
     public float jumpForce;
-    [SerializeField] float attackDamage;
-    [SerializeField] float delayBetweenAttacks;
+    public float attackDamage;
+    public float delayBetweenAttacks;
     [SerializeField] float detectionRange;
     [SerializeField] float stopDistance;
     [SerializeField] Transform uiCanvas;
     [SerializeField] Transform groundCheckTransform;
     [SerializeField] Transform patrolSensor;
     [SerializeField] LayerMask whatIsGround;
+
+    [Header("Particles")]
+    [SerializeField] private GameObject jumpEffect;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -25,6 +28,7 @@ public class EnemyBrain : MonoBehaviour
 
     private int direction;
     private bool isGrounded;
+    private bool prevFrameIsGrounded;
     private bool canJump;
     private bool isChasing;
     private bool isTargetInRange;
@@ -67,7 +71,7 @@ public class EnemyBrain : MonoBehaviour
     }
     private void Move()
     {
-        rb.velocity = (isTargetInRange) ? new Vector2(movementSpeed * direction, rb.velocity.y) : new Vector2(isGrounded?0f:rb.velocity.x, rb.velocity.y);
+        rb.velocity = (isTargetInRange) ? new Vector2(movementSpeed * direction, rb.velocity.y) : new Vector2(isGrounded?0f:rb.velocity.x * 0.5f, rb.velocity.y);
         isChasing = rb.velocity.magnitude >= 0.01f;
     }
 
@@ -92,7 +96,14 @@ public class EnemyBrain : MonoBehaviour
 
     private void GroundCheck()
     {
+        prevFrameIsGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsGround);
+
+        if (!prevFrameIsGrounded && isGrounded)
+        {
+            GameObject effect = Instantiate(jumpEffect, groundCheckTransform.position, Quaternion.identity);
+            Destroy(effect, 0.75f);
+        }
     }
 
     private void EnemyAnimations()
@@ -115,7 +126,7 @@ public class EnemyBrain : MonoBehaviour
     {
         canJump = false;
         Vector2 jumpDirection = transform.up + direction * transform.right;
-        rb.AddForce(jumpDirection.normalized * jumpForce, ForceMode2D.Impulse);
+        rb.AddForce(jumpDirection.normalized * jumpForce * rb.mass, ForceMode2D.Impulse);
         yield return new WaitForSeconds(Random.Range(0.5f, 1f));
         canJump = true;
     }

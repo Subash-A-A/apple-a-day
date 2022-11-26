@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5045754190531500929}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Sensors
   m_TagString: EnemyInner
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3362817489427159128}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 3362817489988371095}
   - component: {fileID: 3362817489988371094}
   - component: {fileID: 5392879091060226920}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 3362817490522957717}
   - component: {fileID: 3362817490522957716}
   - component: {fileID: 8540558855780758326}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Body
   m_TagString: EnemyInner
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3362817490522957718}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a27c8d4e352fbf041bcecc4f7eeb15c1, type: 2}
+  m_Material: {fileID: 6200000, guid: c3a9c9d801c676f4bbc0f8084406b42e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -289,7 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3362817490576314258}
   - component: {fileID: 3362817490576314257}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: EvilDoc1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 3362817490674207482}
   - component: {fileID: 3362817490674207481}
   - component: {fileID: 8129791501239254369}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: R_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3362817490674207483}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a27c8d4e352fbf041bcecc4f7eeb15c1, type: 2}
+  m_Material: {fileID: 6200000, guid: c3a9c9d801c676f4bbc0f8084406b42e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 3362817491149052425}
   - component: {fileID: 3362817491149052424}
   - component: {fileID: 4358842847573872170}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: R_Leg
   m_TagString: EnemyInner
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3362817491149052426}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a27c8d4e352fbf041bcecc4f7eeb15c1, type: 2}
+  m_Material: {fileID: 6200000, guid: c3a9c9d801c676f4bbc0f8084406b42e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 3362817491158658332}
   - component: {fileID: 3362817491158658403}
   - component: {fileID: 8884361502244671618}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: L_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +680,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3362817491158658333}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a27c8d4e352fbf041bcecc4f7eeb15c1, type: 2}
+  m_Material: {fileID: 6200000, guid: c3a9c9d801c676f4bbc0f8084406b42e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  jumpForce: 10
+  jumpForce: 15
   attackDamage: 10
   delayBetweenAttacks: 1
   detectionRange: 5
@@ -831,6 +831,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  jumpEffect: {fileID: 3842628460474599581, guid: 44011a29b3edb684e8d2ac16eeae2784, type: 3}
 --- !u!114 &3362817490603996848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +879,7 @@ MonoBehaviour:
   - {x: 0.32999992, y: -0.4823892, z: 0}
   m_ShapePathHash: -1750128421
   m_Mesh: {fileID: 0}
-  m_InstanceId: 49304
+  m_InstanceId: 61208
 --- !u!114 &2880251341051157606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,7 +911,7 @@ GameObject:
   - component: {fileID: 3362817491258044725}
   - component: {fileID: 3362817491258044724}
   - component: {fileID: 494602702056603121}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: L_Leg
   m_TagString: EnemyInner
   m_Icon: {fileID: 0}
@@ -993,7 +994,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3362817491258044726}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a27c8d4e352fbf041bcecc4f7eeb15c1, type: 2}
+  m_Material: {fileID: 6200000, guid: c3a9c9d801c676f4bbc0f8084406b42e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1019,7 +1020,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8012300481015446077}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: PatrolSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,9 +1049,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3362817491245842857}
     m_Modifications:
+    - target: {fileID: 2890696967344928004, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890696968587817476, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2890696969254022632, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890696969254022632, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2890696969254022633, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
       propertyPath: m_Pivot.x
@@ -1135,6 +1148,10 @@ PrefabInstance:
     - target: {fileID: 2890696969254022633, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890696969323476316, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff1d1231a524df94a914133643ca5c67, type: 3}

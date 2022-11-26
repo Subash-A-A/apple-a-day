@@ -14,4 +14,9 @@ public class CameraFollow : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPos, followSmooth * Time.unscaledDeltaTime);
         }
     }
+
+    public void ChangeDistance(float dist)
+    {
+        distance = dist;
+    }
 }

@@ -3,16 +3,20 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour
 {
-    public bool isMeeleWeapon;
+    [SerializeField] bool isMeeleWeapon;
     [SerializeField] float meeleDashPower = 10f;
     [SerializeField] float meeleDashTime = 0.2f;
     [SerializeField] float meeleDashCooldown = 1f;
     [SerializeField] TrailRenderer tr;
     [SerializeField] GameObject meeleHitBox;
 
+    [SerializeField] bool hasAltAttack;
+    [SerializeField] bool isAltAttackRanged;
+
     [SerializeField] GameObject player;
     [SerializeField] Transform attackPoint;
     [SerializeField] GameObject bulletPrefab;
+    
     [SerializeField] float impactForce = 10f;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float bulletDamage = 100f;
@@ -36,12 +40,15 @@ public class Weapon : MonoBehaviour
 
     private bool canShoot = true;
     private bool isShooting;
+    private bool pressedAltFire;
+    private Animator anim;
 
     private void Awake()
     {
         playerMovement = player.GetComponent<PlayerMovement>();
         playerRb = player.GetComponent<Rigidbody2D>();
         playerColl = player.GetComponent<Collider2D>();
+        anim = GetComponentInParent<Animator>();
     }
 
     private void Start()
@@ -76,9 +83,14 @@ public class Weapon : MonoBehaviour
         
         if (isMeeleWeapon)
         {
-            if (isShooting)
+            if (!PlayerUltimate.canKatanaSlash && isShooting && canShoot)
             {
                 MeeleDash();
+            }
+
+            if (canShoot && pressedAltFire)
+            {
+                StartCoroutine(KatanaSlash());
             }
         }
 
@@ -96,7 +108,7 @@ public class Weapon : MonoBehaviour
 
     private void GetHitPoint()
     {
-        Ray2D ray = new Ray2D(attackPoint.position, weaponHolder.right);
+        Ray2D ray = new(attackPoint.position, weaponHolder.right);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, range, targetLayer);
         if (hit.collider != null)
         {
@@ -126,6 +138,7 @@ public class Weapon : MonoBehaviour
     private void MyInput()
     {
         isShooting = isFullAuto ? Input.GetButton("Fire1") : Input.GetButtonDown("Fire1");
+        pressedAltFire = Input.GetButtonDown("Fire2");
     }
 
     private void SpawnBullet()
@@ -147,5 +160,15 @@ public class Weapon : MonoBehaviour
             audioManager.Play("KatanaSlash", Random.Range(1f, 2f));
             StartCoroutine(playerMovement.PlayerDashAttack(player.transform.right, meeleDashPower, meeleDashTime, meeleDashCooldown, tr, meeleHitBox));
         }
+    }
+
+    public IEnumerator KatanaSlash()
+    {
+        anim.SetTrigger("Ultimate");
+        canShoot = false;
+        yield return new WaitUntil(() => PlayerUltimate.canKatanaSlash);
+        PlayerUltimate.canKatanaSlash = false;
+        SpawnBullet();
+        canShoot = true;
     }
 }
