@@ -3322,6 +3322,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 584309990893632652, guid: b8329455a53710a4aa2ff026a6098bd0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 584309990893633394, guid: b8329455a53710a4aa2ff026a6098bd0, type: 3}
       propertyPath: weaponMenu
       value: 

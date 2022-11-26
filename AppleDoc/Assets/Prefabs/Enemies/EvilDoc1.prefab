@@ -822,7 +822,7 @@ MonoBehaviour:
   movementSpeed: 3
   jumpForce: 10
   attackDamage: 10
-  delayBetweenAttacks: 0.25
+  delayBetweenAttacks: 1
   detectionRange: 5
   stopDistance: 0.5
   uiCanvas: {fileID: 3362817491035977254}
@@ -846,7 +846,7 @@ MonoBehaviour:
   maxHealth: 100
   healthColor: {r: 0.97647065, g: 0.27058825, b: 0.27450982, a: 1}
   healthBarFill: {fileID: 3362817490837483153}
-  hitImpact: 2
+  hitImpactForce: 3
 --- !u!114 &4364925938104755380
 MonoBehaviour:
   m_ObjectHideFlags: 0

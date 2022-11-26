@@ -31,6 +31,8 @@ public class Ragdoll : MonoBehaviour
 
         if (TryGetComponent<PlayerMovement>(out var player))
         {
+            GameObject weaponHolder = GetComponentInChildren<WeaponHolder>().gameObject;
+            Destroy(weaponHolder);
             player.enabled = false;
         }
 

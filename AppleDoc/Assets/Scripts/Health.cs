@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
     public float maxHealth = 100f;
     [SerializeField] Color healthColor;
     [SerializeField] Image healthBarFill;
-    [SerializeField] float hitImpact = 2f;
+    [SerializeField] float hitImpactForce = 3f;
 
     private float currentHealth;
     private float healthNormalized;
@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float value)
     {
         anim.SetTrigger("Hit");
-        rb.AddForce(hitImpact * rb.mass * (transform.up + transform.right * -1).normalized, ForceMode2D.Impulse);
+        rb.AddForce(hitImpactForce * (transform.up * 0.5f + transform.right * -1), ForceMode2D.Impulse);
 
         currentHealth -= value;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);

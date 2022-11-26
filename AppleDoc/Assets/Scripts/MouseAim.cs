@@ -8,7 +8,7 @@ public class MouseAim : MonoBehaviour
     [SerializeField] Transform uiCanvas;
     [SerializeField] Camera cam;
 
-    public bool canAim = true;
+    public bool canAim;
 
     private Vector2 mousePosition;
     private bool isFacingRight;
@@ -20,9 +20,12 @@ public class MouseAim : MonoBehaviour
     }
     private void Update()
     {
-        GetMousePosition();
-        FlipPlayer();
-        AimWeapon();
+        if (canAim && weaponHolder != null)
+        {
+            GetMousePosition();
+            FlipPlayer();
+            AimWeapon();
+        }
     }
 
     private void GetMousePosition()
@@ -33,30 +36,23 @@ public class MouseAim : MonoBehaviour
 
     private void FlipPlayer()
     {
-        if (canAim)
+        if (mousePosition.x > transform.position.x)
         {
-            if (mousePosition.x > transform.position.x)
-            {
-                transform.localRotation = Quaternion.identity;
-                uiCanvas.localRotation = Quaternion.identity;
-                isFacingRight = true;
-            }
-            else if (mousePosition.x < transform.position.x && isFacingRight)
-            {
-                transform.localRotation = Quaternion.Euler(0, 180, 0);
-                uiCanvas.localRotation = Quaternion.Euler(0, 180, 0);
-
-                isFacingRight = false;
-            }
+            transform.localRotation = Quaternion.identity;
+            uiCanvas.localRotation = Quaternion.identity;
+            isFacingRight = true;
+        }
+        else if (mousePosition.x < transform.position.x && isFacingRight)
+        {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            uiCanvas.localRotation = Quaternion.Euler(0, 180, 0);
+            isFacingRight = false;
         }
     }
 
     private void AimWeapon()
     {
-        if (canAim)
-        {
-            float aimAngle = Mathf.Atan2(mousePosition.y, Mathf.Abs(mousePosition.x)) * Mathf.Rad2Deg;
-            weaponHolder.localRotation = Quaternion.Euler(0, 0, aimAngle); 
-        }
+        float aimAngle = Mathf.Atan2(mousePosition.y, Mathf.Abs(mousePosition.x)) * Mathf.Rad2Deg;
+        weaponHolder.localRotation = Quaternion.Euler(0, 0, aimAngle); 
     }
 }
