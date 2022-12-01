@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce;
 
     [Header("Particles")]
+    public ParticleSystem dashEffect;
     [SerializeField] GameObject jumpEffect;
-    [SerializeField] ParticleSystem dashEffect;
 
     [Header("Refrences")]
     [SerializeField] Transform groundCheckTransform;

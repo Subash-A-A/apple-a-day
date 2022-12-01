@@ -1,71 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [System.Serializable]
-    class SpawnItem
-    {
-        public GameObject spawn;
-        [Range(0.25f, 1f)]
-        public float minSize;
-    }
-
-    [SerializeField] SpawnItem[] enemies;
-    [SerializeField] float spawnDelay = 1f;
-    [SerializeField] int maxSpawnAmount = 20;
-    [SerializeField] float spawnRadius = 10f;
-
-    private bool canSpawn;
-    private int count;
+    [SerializeField] Spawner[] spawners;
+    [SerializeField] int currentSpawner = 0;
 
     private void Start()
     {
-        canSpawn = true;
+        DisableAll();
+        spawners[currentSpawner].enabled = true;
     }
 
     private void Update()
     {
-        if (canSpawn && count < maxSpawnAmount)
+        if (spawners[currentSpawner].canSpawnBoss && !spawners[currentSpawner].isBossSpawned)
         {
-            StartCoroutine(Spawn());
+            spawners[currentSpawner].SpawnBoss();
+        }
+        if (spawners[currentSpawner].finishedSpawning && !spawners[currentSpawner].isFinalSpawner)
+        {
+            DisableAll();
+            currentSpawner++;
+            spawners[currentSpawner].enabled = true;
         }
     }
 
-    IEnumerator Spawn()
-    {   
-        Vector2 spawnPos = Random.insideUnitCircle.normalized * spawnRadius;
-
-        if(spawnPos.y < 0)
-        {
-            spawnPos.y = 0;
-        }
-
-        canSpawn = false;
-        SpawnItem enemyItem = enemies[Random.Range(0, enemies.Length)];
-        GameObject enemy = Instantiate(enemyItem.spawn, spawnPos, Quaternion.identity);
-
-        SetEnemyParameters(enemy, enemyItem);
-
-        count++;
-        yield return new WaitForSeconds(spawnDelay);
-        canSpawn = true;
-    }
-
-    private void SetEnemyParameters(GameObject enemy, SpawnItem enemyItem)
+    void DisableAll()
     {
-        EnemyBrain brain = enemy.GetComponent<EnemyBrain>();
-        Animator anim = enemy.GetComponent<Animator>();
-        Health health = enemy.GetComponent<Health>();
-        float randomScale = Random.Range(enemyItem.minSize, 1f);
-        enemy.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-        brain.movementSpeed /= randomScale;
-        brain.jumpForce /= randomScale;
-        brain.delayBetweenAttacks *= randomScale;
-        brain.attackDamage *= randomScale;
-        health.maxHealth *= randomScale;
-        anim.SetFloat("chaseSpeed", 1 / randomScale);
+        foreach(var spawner in spawners)
+        {
+            spawner.enabled = false;
+        }
     }
-    
 }

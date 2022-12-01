@@ -137,7 +137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 25
   m_Sprite: {fileID: -1648174032, guid: 3fd45182852a5af47a2d736b494a69f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -248,7 +248,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 80507104, guid: 3fd45182852a5af47a2d736b494a69f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -342,7 +342,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.52717376}
+  m_Offset: {x: 0, y: 0.34796023}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -353,7 +353,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 2.827167}
+  m_Size: {x: 1.1, y: 2.4687402}
   m_EdgeRadius: 0
 --- !u!50 &4846160069103135145
 Rigidbody2D:
@@ -427,7 +427,7 @@ MonoBehaviour:
   - {x: 0.37278977, y: -0.83577824, z: 0}
   m_ShapePathHash: 1536813043
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61396
+  m_InstanceId: 153860
 --- !u!114 &3548495074844820767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   jumpForce: 10
   attackDamage: 50
   delayBetweenAttacks: 2
-  detectionRange: 20
+  detectionRange: 100
   stopDistance: 0.5
   uiCanvas: {fileID: 6140248363960980289}
   groundCheckTransform: {fileID: 2283338391723038430}
@@ -562,7 +562,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 24
   m_Sprite: {fileID: -596511107, guid: 3fd45182852a5af47a2d736b494a69f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -663,7 +663,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 479341934, guid: 3fd45182852a5af47a2d736b494a69f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -777,7 +777,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 23
   m_Sprite: {fileID: -1558168191, guid: 3fd45182852a5af47a2d736b494a69f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -888,7 +888,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: -76162284, guid: 3fd45182852a5af47a2d736b494a69f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1063,6 +1063,10 @@ PrefabInstance:
     - target: {fileID: 2890696969254022633, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890696969254022635, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2890696969323476316, guid: ff1d1231a524df94a914133643ca5c67, type: 3}
       propertyPath: m_Layer

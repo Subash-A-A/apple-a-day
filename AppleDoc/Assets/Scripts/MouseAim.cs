@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseAim : MonoBehaviour
 {
     [SerializeField] Transform weaponHolder;
     [SerializeField] Transform uiCanvas;
-    [SerializeField] Camera cam;
+    [SerializeField] CameraFollow follow;
 
     public bool canAim;
 

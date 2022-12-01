@@ -126,7 +126,7 @@ public class EnemyBrain : MonoBehaviour
     {
         canJump = false;
         Vector2 jumpDirection = transform.up + direction * transform.right;
-        rb.AddForce(jumpDirection.normalized * jumpForce * rb.mass, ForceMode2D.Impulse);
+        rb.AddForce(jumpForce * rb.mass * jumpDirection.normalized, ForceMode2D.Impulse);
         yield return new WaitForSeconds(Random.Range(0.5f, 1f));
         canJump = true;
     }
@@ -138,6 +138,7 @@ public class EnemyBrain : MonoBehaviour
             StartCoroutine(DealDamage(collision.gameObject));
         }
     }
+    
     IEnumerator DealDamage(GameObject obj)
     {
         obj.GetComponent<Health>().TakeDamage(attackDamage);

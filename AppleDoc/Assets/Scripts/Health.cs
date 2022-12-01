@@ -43,11 +43,19 @@ public class Health : MonoBehaviour
             if(TryGetComponent<EnemyBrain>(out EnemyBrain brain))
             {
                 brain.GetComponent<Ragdoll>().ActivateRagdoll();
+                FindObjectOfType<KillCounter>().killCount++;
             }
 
             if (TryGetComponent<PlayerMovement>(out PlayerMovement player))
             {
                 player.GetComponent<Ragdoll>().ActivateRagdoll();
+                FindObjectOfType<GManager>().Defeat();
+            }
+
+            if (TryGetComponent<BossAttacks>(out BossAttacks boss))
+            {
+                boss.GetComponent<Ragdoll>().ActivateRagdoll();
+                FindObjectOfType<GManager>().Victory();
             }
         }
     }

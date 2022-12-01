@@ -137,7 +137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 24
   m_Sprite: {fileID: 425648203, guid: 6a1a95b7ea813464193d093d7805a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -241,7 +241,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 23
   m_Sprite: {fileID: 735660764, guid: 6a1a95b7ea813464193d093d7805a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -351,7 +351,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 24
   m_Sprite: {fileID: -1836261034, guid: 6a1a95b7ea813464193d093d7805a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -437,7 +437,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 22
   m_Sprite: {fileID: -933757375, guid: 6a1a95b7ea813464193d093d7805a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -548,7 +548,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: -729726311, guid: 6a1a95b7ea813464193d093d7805a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -659,7 +659,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 25
   m_Sprite: {fileID: 1201798847, guid: 6a1a95b7ea813464193d093d7805a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -823,7 +823,7 @@ MonoBehaviour:
   jumpForce: 15
   attackDamage: 10
   delayBetweenAttacks: 1
-  detectionRange: 5
+  detectionRange: 100
   stopDistance: 0.5
   uiCanvas: {fileID: 3362817491035977254}
   groundCheckTransform: {fileID: 3362817489427159128}
@@ -879,7 +879,7 @@ MonoBehaviour:
   - {x: 0.32999992, y: -0.4823892, z: 0}
   m_ShapePathHash: -1750128421
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61208
+  m_InstanceId: 151082
 --- !u!114 &2880251341051157606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,7 +973,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 1188306127, guid: 6a1a95b7ea813464193d093d7805a650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

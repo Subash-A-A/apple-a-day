@@ -37,10 +37,18 @@ public class Ragdoll : MonoBehaviour
             player.enabled = false;
         }
 
+        if (TryGetComponent<BossAttacks>(out var boss))
+        {
+            boss.enabled = false;
+        }
+
         Destroy(mainRigidbody);
         mainCollider.enabled = false;
         anim.enabled = false;
-        shadowCaster.enabled = false;
+        if (shadowCaster)
+        {
+            shadowCaster.enabled = false;
+        }
         uiCanvas.SetActive(false);
 
         foreach (var collider in colliderArr)

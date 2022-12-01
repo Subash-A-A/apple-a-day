@@ -31,6 +31,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject torchLight;
     
     private LineRenderer line;
+    private KillCounter counter;
     private PlayerMovement playerMovement;
     private Rigidbody2D playerRb;
     private Collider2D playerColl;
@@ -49,6 +50,7 @@ public class Weapon : MonoBehaviour
         playerRb = player.GetComponent<Rigidbody2D>();
         playerColl = player.GetComponent<Collider2D>();
         anim = GetComponentInParent<Animator>();
+        counter = FindObjectOfType<KillCounter>();
     }
 
     private void Start()
@@ -64,7 +66,6 @@ public class Weapon : MonoBehaviour
     {
         canShoot = true;
         torchLight.SetActive(useTorch);
-
         if (isMeeleWeapon)
         {
             meeleHitBox.SetActive(false);
@@ -75,6 +76,7 @@ public class Weapon : MonoBehaviour
             playerColl.enabled = true;
             playerRb.gravityScale = 1f;
         }
+        playerMovement.dashEffect.Stop();
     }
 
     private void Update()
@@ -88,7 +90,7 @@ public class Weapon : MonoBehaviour
                 MeeleDash();
             }
 
-            if (canShoot && pressedAltFire)
+            if (canShoot && pressedAltFire && counter.canUlt)
             {
                 StartCoroutine(KatanaSlash());
             }
